@@ -1,0 +1,35 @@
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+    <definition name="adminBase" template="/WEB-INF/tiles/admin/common/template.jsp">
+        <put-attribute name="meta" value="/WEB-INF/tiles/admin/common/meta.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/admin/common/footer.jsp" />
+    </definition>
+
+    <definition name="frontBase" template="/WEB-INF/tiles/front/common/template.jsp">
+        <put-attribute name="meta" value="/WEB-INF/tiles/front/common/meta.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/front/common/footer.jsp" />
+    </definition>
+
+    <definition name="*/admin/*" extends="adminBase">
+        <put-attribute name="header" value="/WEB-INF/tiles/admin/{2}/header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/tiles/admin/{2}/body.jsp" />
+    </definition>
+
+    <definition name="*/admin/*/*" extends="adminBase">
+        <put-attribute name="header" value="/WEB-INF/tiles/admin/{2}/{3}/header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/tiles/admin/{2}/{3}/body.jsp" />
+    </definition>
+
+    <definition name="*/*" extends="frontBase">
+        <put-attribute name="header" value="/WEB-INF/tiles/front/{2}/header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/tiles/front/{2}/body.jsp" />
+    </definition>
+
+    <definition name="*/*/*" extends="frontBase">
+        <put-attribute name="header" value="/WEB-INF/tiles/front/{2}/{3}/header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/tiles/front/{2}/{3}/body.jsp" />
+    </definition>
+
+</tiles-definitions>
