@@ -1,5 +1,6 @@
 <div class="masthead">
     <h3 class="muted">ZenJava Community</h3>
+
     <div class="navbar">
         <div class="navbar-inner">
             <div class="container">

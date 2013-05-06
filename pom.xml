@@ -25,16 +25,24 @@
         <finalName>community</finalName>
 
         <plugins>
+
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.10</version>
+                <groupId>org.lesscss</groupId>
+                <artifactId>lesscss-maven-plugin</artifactId>
+                <version>1.3.3</version>
                 <configuration>
-                    <contextPath>/guestbook</contextPath>
-                    <stopKey>foo</stopKey>
-                    <stopPort>9999</stopPort>
+                    <outputDirectory>${project.build.directory}/${project.build.finalName}/resources/css</outputDirectory>
+                    <compress>true</compress>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
+
         </plugins>
 
     </build>
