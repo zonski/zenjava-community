@@ -3,5 +3,7 @@
 
 <jsp:useBean id="systemInfo" scope="request" type="com.zenjava.community.service.data.SystemInfoDetail"/>
 
+<div class="container">
 Name: <c:out value="${systemInfo.name}" /><br/>
 Description: <c:out value="${systemInfo.description}" /><br/>
+</div>

@@ -1,1 +1,3 @@
-<p>This is the ADMIN footer</p>
+<div class="container-fluid">
+    <p class="muted">ZenJava Community | Daniel Zwolenski | 2013</p>
+</div>

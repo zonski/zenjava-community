@@ -2,33 +2,41 @@
 
 <tiles-definitions>
 
+    <!-- Admin -->
+
     <definition name="adminBase" template="/WEB-INF/tiles/admin/common/template.jsp">
         <put-attribute name="meta" value="/WEB-INF/tiles/admin/common/meta.jsp" />
+        <put-attribute name="header" value="/WEB-INF/tiles/admin/common/header.jsp" />
         <put-attribute name="footer" value="/WEB-INF/tiles/admin/common/footer.jsp" />
     </definition>
 
-    <definition name="frontBase" template="/WEB-INF/tiles/front/common/template.jsp">
-        <put-attribute name="meta" value="/WEB-INF/tiles/front/common/meta.jsp" />
-        <put-attribute name="footer" value="/WEB-INF/tiles/front/common/footer.jsp" />
-    </definition>
-
     <definition name="*/admin/*" extends="adminBase">
-        <put-attribute name="header" value="/WEB-INF/tiles/admin/{2}/header.jsp" />
         <put-attribute name="body" value="/WEB-INF/tiles/admin/{2}/body.jsp" />
     </definition>
 
     <definition name="*/admin/*/*" extends="adminBase">
-        <put-attribute name="header" value="/WEB-INF/tiles/admin/{2}/{3}/header.jsp" />
         <put-attribute name="body" value="/WEB-INF/tiles/admin/{2}/{3}/body.jsp" />
     </definition>
 
+
+    <!-- Front -->
+
+    <definition name="frontBase" template="/WEB-INF/tiles/front/common/template.jsp">
+        <put-attribute name="meta" value="/WEB-INF/tiles/front/common/meta.jsp" />
+        <put-attribute name="header" value="/WEB-INF/tiles/front/common/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/front/common/footer.jsp" />
+    </definition>
+
+    <definition name="*/login" extends="frontBase">
+        <put-attribute name="body" value="/WEB-INF/tiles/front/login/body.jsp" />
+        <put-attribute name="header" value="/WEB-INF/tiles/front/login/header.jsp" />
+    </definition>
+
     <definition name="*/*" extends="frontBase">
-        <put-attribute name="header" value="/WEB-INF/tiles/front/{2}/header.jsp" />
         <put-attribute name="body" value="/WEB-INF/tiles/front/{2}/body.jsp" />
     </definition>
 
     <definition name="*/*/*" extends="frontBase">
-        <put-attribute name="header" value="/WEB-INF/tiles/front/{2}/{3}/header.jsp" />
         <put-attribute name="body" value="/WEB-INF/tiles/front/{2}/{3}/body.jsp" />
     </definition>
 

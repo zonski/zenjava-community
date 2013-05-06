@@ -1,34 +1,47 @@
 <%@ page session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
 
-<head>
-    <title>Login: Spring Security Web Application</title>
+<form class="form-horizontal" action='j_spring_security_check' method="POST">
 
-    <style TYPE="text/css">
-        .errormessage {
-            color:red;
-        }
-    </style>
-</head>
+    <fieldset>
 
-<body onload='document.loginForm.j_username.focus();'>
+        <div id="legend">
+            <legend class="">Login</legend>
+        </div>
 
-<form id="loginForm" name="loginForm" action="j_spring_security_check" method="post">
-    <c:if test="${not empty param.authfailed}">
-    <span id="infomessage" class="errormessage" >
-    Login failed due to: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>.
-    </span>
-    </c:if>
-    <table>
-        <tr><td>Username</td><td><input id="usernameField" type="text" name="j_username" value="<c:out value="${SPRING_SECURITY_LAST_USERNAME}"/>"/></td></tr>
-        <tr><td>Password</td><td><input id="passwordField" type="password" name="j_password" /></td></tr>
+        <div class="control-group">
+            <!-- Username -->
+            <label class="control-label"  for="username">Username</label>
+            <div class="controls">
+                <input type="text" id="username" name="j_username" placeholder="" class="input-xlarge"
+                       value="<c:out value="${SPRING_SECURITY_LAST_USERNAME}"/>">
+            </div>
+        </div>
 
-        <tr><td colspan="2" align="right"><input type="submit" value="Login" /></td></tr>
-    </table>
+        <div class="control-group">
+            <!-- Password-->
+            <label class="control-label" for="password">Password</label>
+            <div class="controls">
+                <input type="password" id="password" name="j_password" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <c:if test="${not empty param.authfailed}">
+            <div class="control-group">
+                <div class="controls">
+                    <span class="alert alert-error">
+                        Login failed due to: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>.
+                    </span>
+                </div>
+            </div>
+        </c:if>
+
+        <div class="control-group">
+            <!-- Button -->
+            <div class="controls">
+                <button class="btn btn-success">Login</button>
+            </div>
+        </div>
+    </fieldset>
 </form>
-
-</body>
-
-</html>

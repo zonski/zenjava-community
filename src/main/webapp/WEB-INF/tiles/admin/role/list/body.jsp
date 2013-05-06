@@ -4,17 +4,39 @@
 
 <jsp:useBean id="roles" scope="request" type="java.util.List<com.zenjava.community.service.data.RoleRef>"/>
 
-<c:choose>
-    <c:when test="${not empty roles}">
-        <ul>
+<h2>Roles</h2>
+
+<table class="table table-striped table-condensed">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <c:choose>
+        <c:when test="${not empty roles}">
             <c:forEach items="${roles}" var="role">
-                <li>
-                    <a href="/admin/role/${role.id}"><c:out value="${role.name}" /></a><br/>
-                </li>
+                <tr>
+                    <td>
+                        <a href="/admin/role/${role.id}"><c:out value="${role.name}" /></a><br/>
+                    </td>
+                    <td>
+                        todo
+                    </td>
+                </tr>
             </c:forEach>
-        </ul>
-    </c:when>
-    <c:otherwise>
-        No roles exist.
-    </c:otherwise>
-</c:choose>
+        </c:when>
+        <c:otherwise>
+            <tr>
+                <td colspan="2">
+                    No roles exist.
+                </td>
+            </tr>
+        </c:otherwise>
+    </c:choose>
+    </tbody>
+
+</table>

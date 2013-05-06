@@ -4,17 +4,44 @@
 
 <jsp:useBean id="users" scope="request" type="java.util.List<com.zenjava.community.service.data.UserRef>"/>
 
-<c:choose>
-    <c:when test="${not empty users}">
-        <dl class="listings">
+
+<h2>Users</h2>
+
+<table class="table table-striped table-condensed">
+
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>First name</th>
+        <th>Last name</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <c:choose>
+        <c:when test="${not empty users}">
             <c:forEach items="${users}" var="user">
-                <dt>
-                    <a href="/admin/user/${user.id}"><c:out value="${user.username}" /></a><br/>
-                </dt>
+                <tr>
+                    <td>
+                        <a href="/admin/user/${user.id}"><c:out value="${user.username}" /></a>
+                    </td>
+                    <td>
+                        <c:out value="${user.firstName}"/>
+                    </td>
+                    <td>
+                        <c:out value="${user.lastName}"/>
+                    </td>
+                </tr>
             </c:forEach>
-        </dl>
-    </c:when>
-    <c:otherwise>
-        No users exist.
-    </c:otherwise>
-</c:choose>
+        </c:when>
+        <c:otherwise>
+            <tr>
+                <td colspan="3">
+                    No users exist.
+                </td>
+            </tr>
+        </c:otherwise>
+    </c:choose>
+    </tbody>
+
+</table>
