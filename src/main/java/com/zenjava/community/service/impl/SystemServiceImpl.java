@@ -66,7 +66,7 @@ public class SystemServiceImpl implements SystemService {
 
         // 'admin' user
 
-        User admin = new User("admin", "Admin", "User", adminRole);
+        User admin = new User("admin", "password", "admin@zenjava.com", "Admin", "User", Arrays.asList(adminRole));
         admin.setPassword(passwordEncoder.encodePassword("password", saltSource.getSalt(
                 new CustomUserDetails(userDetailBuilder.build(admin), "password", new ArrayList<GrantedAuthority>()))));
         userRepository.save(admin);
@@ -74,7 +74,7 @@ public class SystemServiceImpl implements SystemService {
 
         // 'danz' user
 
-        User danz = new User("danz", "Dan", "Zwolenski", userRole);
+        User danz = new User("danz", "password", "zonski@gmail.com", "Dan", "Zwolenski", Arrays.asList(userRole));
         danz.setPassword(passwordEncoder.encodePassword("password", saltSource.getSalt(
                 new CustomUserDetails(userDetailBuilder.build(danz), "password", new ArrayList<GrantedAuthority>()))));
         userRepository.save(danz);

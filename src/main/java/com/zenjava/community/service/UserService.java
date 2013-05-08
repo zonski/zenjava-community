@@ -1,9 +1,6 @@
 package com.zenjava.community.service;
 
-import com.zenjava.community.service.data.RoleDetail;
-import com.zenjava.community.service.data.RoleRef;
-import com.zenjava.community.service.data.UserDetail;
-import com.zenjava.community.service.data.UserRef;
+import com.zenjava.community.service.data.*;
 
 import java.util.List;
 
@@ -18,4 +15,7 @@ public interface UserService {
     RoleDetail findRole(long id);
 
     List<RoleRef> findAllRoles();
+
+    UserRef signUpUser(SignUpRequest request);
+
 }

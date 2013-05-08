@@ -20,11 +20,29 @@
         <log4j.version>1.2.16</log4j.version>
     </properties>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>repository.springframework.maven.milestone</id>
+            <name>Spring Framework Maven Milestone Repository</name>
+            <url>http://maven.springframework.org/milestone/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
 
         <finalName>community</finalName>
 
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>org.lesscss</groupId>
@@ -41,6 +59,19 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.cloudfoundry</groupId>
+                <artifactId>cf-maven-plugin</artifactId>
+                <version>1.0.0.M1</version>
+                <configuration>
+                    <server>appfog-cloud</server>
+                    <appname>zenjavacommunity</appname>
+                    <target>https://api.appfog.com</target>
+                    <url>zenjavacommunity.ap01.aws.af.cm</url>
+                    <memory>256</memory>
+                </configuration>
             </plugin>
 
         </plugins>
@@ -165,8 +196,8 @@
 
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <version>4.1.0.Final</version>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.3.1.Final</version>
         </dependency>
 
         <!-- Tiles  -->

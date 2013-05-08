@@ -1,7 +1,7 @@
 package com.zenjava.community.service.impl.entity;
 
 import javax.persistence.*;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +12,9 @@ public class User extends AbstractEntity {
 
     @Column(name = "username")
     private String username;
+
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "password")
     private String password;
@@ -32,16 +35,25 @@ public class User extends AbstractEntity {
     public User() {
     }
 
-    public User(String username, String firstName, String lastName, Role... roles) {
+    public User(String username, String password, String email, String firstName, String lastName, Collection<Role> roles) {
         this.username = username;
+        this.password = password;
+        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.roles = new HashSet<>();
-        Collections.addAll(this.roles, roles);
+        this.roles = new HashSet<>(roles);
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

@@ -17,6 +17,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -71,5 +72,21 @@ public class UserServiceImpl implements UserService {
         log.debug("Finding all role details");
         Iterable<Role> roles = roleRepository.findAll();
         return roleRefBuilder.build(roles);
+    }
+
+    @Override
+    @Transactional(readOnly = false)
+    public UserRef signUpUser(SignUpRequest request) {
+        log.info("Signing up new user: '{}' ({})", request.getUsername(), request.getEmail());
+
+        List<Role> roles = new ArrayList<>();
+
+        User user = new User(request.getUsername(), request.getPassword(), request.getEmail(),
+                request.getFirstName(), request.getLastName(), roles);
+        userRepository.save(user);
+
+        // todo send confirmation email
+
+        return userRefBuilder.build(user);
     }
 }
