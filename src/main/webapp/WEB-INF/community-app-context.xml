@@ -27,23 +27,23 @@
     <jpa:repositories base-package="com.zenjava.community.service.impl.repository"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver"/>
-        <property name="url" value="jdbc:hsqldb:file:c:/temp/junk/data/community"/>
-        <property name="username" value="sa"/>
-        <property name="password" value=""/>
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/community"/>
+        <property name="username" value="community"/>
+        <property name="password" value="password"/>
     </bean>
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="hsql" />
+        <property name="persistenceUnitName" value="community" />
         <property name="packagesToScan" value="com.zenjava.community.service.impl.entity" />
         <property name="dataSource" ref="dataSource" />
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
-        </property>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
             </props>
+        </property>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
         </property>
     </bean>
 

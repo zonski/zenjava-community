@@ -6,8 +6,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "c_system_info")
-@SequenceGenerator(name = "sequence_generator", sequenceName = "c_system_info_id_seq")
+@Table(name = "system_info")
+@SequenceGenerator(name = "sequence_generator", sequenceName = "system_info_id_seq")
 public class SystemInfo extends AbstractEntity {
 
     @Column(name = "name")

@@ -184,12 +184,12 @@
             <version>1.4</version>
         </dependency>
 
-        <!-- HSQLDB -->
+        <!-- Postgres -->
 
         <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.2.9</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.2-1002-jdbc4</version>
         </dependency>
 
         <!-- Validation -->
