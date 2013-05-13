@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
@@ -46,4 +47,12 @@ public class SignUpController {
 
         return "redirect:/signup/done";
     }
+
+    @RequestMapping(value = "/activate/{code}")
+    public String activateUserAccount(@PathVariable("code") String code) {
+        log.debug("Showing sign up done page");
+        userService.activateUserAccount(code);
+        return "/signup/activated";
+    }
+
 }

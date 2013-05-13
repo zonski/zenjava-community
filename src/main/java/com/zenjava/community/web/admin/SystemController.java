@@ -3,6 +3,7 @@ package com.zenjava.community.web.admin;
 import com.zenjava.community.service.SystemService;
 import com.zenjava.community.service.data.SystemInfoDetail;
 import com.zenjava.community.service.data.SystemSetupRequest;
+import com.zenjava.community.service.data.exception.SystemNotSetupException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,15 @@ public class SystemController {
 
     @RequestMapping(value = "/admin/setup")
     public String showSetupSystemPage(Model model) {
-        SystemInfoDetail systemInfo = systemService.getSystemInfo();
-        if (systemInfo != null) {
+        try {
             log.debug("Showing system information");
+            SystemInfoDetail systemInfo = systemService.getSystemInfo();
             model.addAttribute("systemInfo", systemInfo);
             return "/admin/setup/view";
-        } else {
+        } catch (SystemNotSetupException e) {
             log.debug("System is not yet setup, showing system setup page");
-            model.addAttribute("command", new SystemSetupRequest("Dev System", "This is a development system"));
+            model.addAttribute("command", new SystemSetupRequest("Dev System", "This is a development system",
+                    "http://localhost:8080/", "smtp.gmail.com", "587", "someone@gmail.com"));
             return "/admin/setup/form";
         }
     }

@@ -1,6 +1,6 @@
 package com.zenjava.community.service.data;
 
-public class RoleDetail extends RoleRef {
+public class RoleDetail extends RoleSnapshot {
 
     private String description;
 

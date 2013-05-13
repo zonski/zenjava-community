@@ -13,53 +13,55 @@
 
         <!-- Username -->
         <div class="control-group">
-            <label class="control-label"  for="username">Username</label>
+            <form:label path="username" cssClass="control-label">Username</form:label>
             <div class="controls">
-                <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
-                <form:errors path="username" />
+                <form:input path="username" cssClass="input-xlarge"/>
+                <form:errors path="username"/>
             </div>
         </div>
 
         <!-- Email -->
         <div class="control-group">
-            <label class="control-label"  for="firstName">Email</label>
+            <form:label path="email" cssClass="control-label">Email</form:label>
             <div class="controls">
-                <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
-                <form:errors path="email" />
+                <form:input path="email" cssClass="input-xlarge"/>
+                <form:errors path="email"/>
             </div>
         </div>
 
         <!-- First name -->
         <div class="control-group">
-            <label class="control-label"  for="firstName">First name</label>
+            <form:label path="firstName" cssClass="control-label">First name</form:label>
             <div class="controls">
-                <input type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge">
-                <form:errors path="firstName" />
+                <form:input path="firstName" cssClass="input-xlarge"/>
+                <form:errors path="firstName"/>
             </div>
         </div>
 
         <!-- Last name -->
         <div class="control-group">
-            <label class="control-label"  for="lastName">Last name</label>
+            <form:label path="lastName" cssClass="control-label">Last name</form:label>
             <div class="controls">
-                <input type="text" id="lastName" name="lastName" placeholder="" class="input-xlarge">
-                <form:errors path="lastName" />
+                <form:input path="lastName" cssClass="input-xlarge"/>
+                <form:errors path="lastName"/>
             </div>
         </div>
 
         <!-- Password-->
         <div class="control-group">
-            <label class="control-label" for="password">Password</label>
+            <form:label path="password" cssClass="control-label">Password</form:label>
             <div class="controls">
-                <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                <form:password path="password" cssClass="input-xlarge"/>
+                <form:errors path="password"/>
             </div>
         </div>
 
         <!-- Confirm password-->
         <div class="control-group">
-            <label class="control-label" for="confirmPassword">Confirm password</label>
+            <form:label path="confirmPassword" cssClass="control-label">Confirm password</form:label>
             <div class="controls">
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="" class="input-xlarge">
+                <form:password path="confirmPassword" cssClass="input-xlarge"/>
+                <form:errors path="confirmPassword"/>
             </div>
         </div>
 

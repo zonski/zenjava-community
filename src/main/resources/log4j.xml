@@ -23,7 +23,7 @@
         environment.
     -->
     <logger name="com.zenjava">
-        <level value="DEBUG"/>
+        <level value="TRACE"/>
     </logger>
 
     <!--

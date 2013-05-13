@@ -1,15 +1,15 @@
 package com.zenjava.community.service.impl.builder;
 
-import com.zenjava.community.service.data.UserRef;
+import com.zenjava.community.service.data.UserSnapshot;
 import com.zenjava.community.service.impl.entity.User;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRefBuilder extends AbstractBuilder<User, UserRef> {
+public class UserSnapshotBuilder extends AbstractBuilder<User, UserSnapshot> {
 
     @Override
-    protected UserRef buildBean(User entity) {
-        return new UserRef(
+    protected UserSnapshot buildBean(User entity) {
+        return new UserSnapshot(
                 entity.getId(),
         		entity.getUsername(),
         		entity.getFirstName(),

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:useBean id="roles" scope="request" type="java.util.List<com.zenjava.community.service.data.RoleRef>"/>
+<jsp:useBean id="roles" scope="request" type="java.util.List<com.zenjava.community.service.data.RoleSnapshot>"/>
 
 <h2>Roles</h2>
 

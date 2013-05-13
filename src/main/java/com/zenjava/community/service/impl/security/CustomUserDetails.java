@@ -11,7 +11,7 @@ public class CustomUserDetails extends User {
     private UserDetail user;
 
     public CustomUserDetails(UserDetail user, String password, Collection<GrantedAuthority> authorities) {
-        super(user.getUsername(), password, true, true, true, true, authorities);
+        super(user.getUsername(), password, user.isActivated(), true, true, true, authorities);
         this.user = user;
     }
 

@@ -19,9 +19,14 @@ values (1.0, 'create-community-schema.sql', now(), 'Create Community Centre Sche
 
 CREATE TABLE system_info
 (
-  id          bigserial NOT NULL PRIMARY KEY,
-  name        text,
-  description text
+  id                  bigserial NOT NULL PRIMARY KEY,
+  name                text,
+  description         text,
+  base_url            text,
+  email_server        text,
+  email_port          text,
+  email_username      text,
+  email_password      text
 );
 
 --------------------------------------------------------------------------------
@@ -30,12 +35,14 @@ CREATE TABLE system_info
 
 CREATE TABLE user_account
 (
-  id          bigserial NOT NULL PRIMARY KEY,
-  username    text,
-  email       text,
-  password    text,
-  first_name  text,
-  last_name	  text
+  id                    bigserial NOT NULL PRIMARY KEY,
+  username              text,
+  email                 text,
+  password              text,
+  activation_code       text,
+  activated             boolean,
+  first_name            text,
+  last_name	            text
 );
 
 --------------------------------------------------------------------------------
@@ -44,9 +51,10 @@ CREATE TABLE user_account
 
 CREATE TABLE role
 (
-  id          bigserial NOT NULL PRIMARY KEY,
-  name        text,
-  description text
+  id              bigserial NOT NULL PRIMARY KEY,
+  name            text,
+  description     text,
+  auto_assign     boolean
 );
 
 --------------------------------------------------------------------------------
@@ -67,4 +75,5 @@ CREATE TABLE role_permission (
   role_id       bigint NOT NULL REFERENCES role ON DELETE CASCADE,
   permission    text
 );
+
 

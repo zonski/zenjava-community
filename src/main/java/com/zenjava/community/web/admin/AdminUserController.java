@@ -2,7 +2,7 @@ package com.zenjava.community.web.admin;
 
 import com.zenjava.community.service.UserService;
 import com.zenjava.community.service.data.UserDetail;
-import com.zenjava.community.service.data.UserRef;
+import com.zenjava.community.service.data.UserSnapshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class AdminUserController {
     @RequestMapping(value = "/user/list")
     public String showUserListPage(Model model) {
         log.debug("Finding all users");
-        List<UserRef> users = userService.findAllUsers();
+        List<UserSnapshot> users = userService.findAllUsers();
         model.addAttribute("users", users);
         return "/admin/user/list";
     }

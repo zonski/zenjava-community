@@ -4,13 +4,14 @@ import com.zenjava.community.service.SystemService;
 import com.zenjava.community.service.data.Permission;
 import com.zenjava.community.service.data.SystemInfoDetail;
 import com.zenjava.community.service.data.SystemSetupRequest;
+import com.zenjava.community.service.data.exception.SystemNotSetupException;
 import com.zenjava.community.service.impl.builder.SystemInfoDetailBuilder;
 import com.zenjava.community.service.impl.builder.UserDetailBuilder;
 import com.zenjava.community.service.impl.entity.Role;
 import com.zenjava.community.service.impl.entity.SystemInfo;
 import com.zenjava.community.service.impl.entity.User;
+import com.zenjava.community.service.impl.helper.SystemInfoHelper;
 import com.zenjava.community.service.impl.repository.RoleRepository;
-import com.zenjava.community.service.impl.repository.SystemInfoRepository;
 import com.zenjava.community.service.impl.repository.UserRepository;
 import com.zenjava.community.service.impl.security.CustomUserDetails;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.Set;
 
 @Service
 @Transactional(readOnly = true)
@@ -33,9 +34,10 @@ public class SystemServiceImpl implements SystemService {
 
     private static final Logger log = LoggerFactory.getLogger(SystemServiceImpl.class);
 
+    @Autowired private SystemInfoHelper systemInfoHelper;
+
     @Autowired private UserRepository userRepository;
     @Autowired private RoleRepository roleRepository;
-    @Autowired private SystemInfoRepository systemInfoRepository;
 
     @Autowired private PasswordEncoder passwordEncoder;
     @Autowired private SaltSource saltSource;
@@ -50,7 +52,7 @@ public class SystemServiceImpl implements SystemService {
 
         // 'admin' role
 
-        Role adminRole = new Role("admin", "Administrator role", new HashSet<>(
+        Role adminRole = new Role("admin", "Administrator role", false, new HashSet<>(
                 Arrays.asList(Permission.ALL_PERMISSIONS)));
         roleRepository.save(adminRole);
         log.info("'{}' role created", adminRole.getName());
@@ -58,15 +60,18 @@ public class SystemServiceImpl implements SystemService {
 
         // 'user' role
 
-        Role userRole = new Role("user", "User role", new HashSet<String>());
-        // todo add user permissions
+        Role userRole = new Role("user", "User role", true, new HashSet<String>());
+        Set<String> userPermissions = new HashSet<>(Arrays.asList(
+                Permission.USER_VIEW_OWN
+        ));
+        userRole.setPermissions(userPermissions);
         roleRepository.save(userRole);
         log.info("'{}' role created", userRole.getName());
 
 
         // 'admin' user
 
-        User admin = new User("admin", "password", "admin@zenjava.com", "Admin", "User", Arrays.asList(adminRole));
+        User admin = new User("admin", true, "admin@zenjava.com", "Admin", "User", Arrays.asList(adminRole));
         admin.setPassword(passwordEncoder.encodePassword("password", saltSource.getSalt(
                 new CustomUserDetails(userDetailBuilder.build(admin), "password", new ArrayList<GrantedAuthority>()))));
         userRepository.save(admin);
@@ -74,7 +79,7 @@ public class SystemServiceImpl implements SystemService {
 
         // 'danz' user
 
-        User danz = new User("danz", "password", "zonski@gmail.com", "Dan", "Zwolenski", Arrays.asList(userRole));
+        User danz = new User("danz", true, "zonski@gmail.com", "Dan", "Zwolenski", Arrays.asList(userRole));
         danz.setPassword(passwordEncoder.encodePassword("password", saltSource.getSalt(
                 new CustomUserDetails(userDetailBuilder.build(danz), "password", new ArrayList<GrantedAuthority>()))));
         userRepository.save(danz);
@@ -82,22 +87,16 @@ public class SystemServiceImpl implements SystemService {
 
 
         // save setup details
-        SystemInfo systemInfo = new SystemInfo(request.getName(), request.getDescription());
-        systemInfoRepository.save(systemInfo);
+        SystemInfo systemInfo = new SystemInfo(
+                request.getName(), request.getDescription(), request.getBaseUrl(),
+                request.getEmailServer(), request.getEmailPort(), request.getEmailUsername(), request.getEmailPassword());
+        systemInfoHelper.saveSystemInfo(systemInfo);
 
         log.info("Done setting up system");
     }
 
     @Override
-    public SystemInfoDetail getSystemInfo() {
-        Iterator<SystemInfo> all = systemInfoRepository.findAll().iterator();
-        if (all.hasNext()) {
-            SystemInfo systemInfo = all.next();
-            log.debug("Found system information '{}'", systemInfo.getName());
-            return systemInfoDetailBuilder.build(systemInfo);
-        } else {
-            log.debug("System is not yet setup, no info available");
-            return null;
-        }
+    public SystemInfoDetail getSystemInfo() throws SystemNotSetupException {
+        return systemInfoDetailBuilder.build(systemInfoHelper.getSystemInfo());
     }
 }

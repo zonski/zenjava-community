@@ -4,11 +4,13 @@ public class SystemInfoDetail extends AbstractIdentifiableBean<Long> {
 
     private String name;
     private String description;
+    private String baseUrl;
 
-    public SystemInfoDetail(Long id, String name, String description) {
+    public SystemInfoDetail(Long id, String name, String description, String baseUrl) {
         super(id);
         this.name = name;
         this.description = description;
+        this.baseUrl = baseUrl;
     }
 
     public String getName() {
@@ -17,5 +19,9 @@ public class SystemInfoDetail extends AbstractIdentifiableBean<Long> {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getBaseUrl() {
+        return baseUrl;
     }
 }

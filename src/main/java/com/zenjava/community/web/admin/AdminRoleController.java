@@ -2,7 +2,7 @@ package com.zenjava.community.web.admin;
 
 import com.zenjava.community.service.UserService;
 import com.zenjava.community.service.data.RoleDetail;
-import com.zenjava.community.service.data.RoleRef;
+import com.zenjava.community.service.data.RoleSnapshot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class AdminRoleController {
     @RequestMapping(value = "/role/list")
     public String showRoleListPage(Model model) {
         log.debug("Finding all roles");
-        List<RoleRef> roles = userService.findAllRoles();
+        List<RoleSnapshot> roles = userService.findAllRoles();
         model.addAttribute("roles", roles);
         return "/admin/role/list";
     }

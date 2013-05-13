@@ -1,10 +1,10 @@
 package com.zenjava.community.service.data;
 
-public class RoleRef extends AbstractIdentifiableBean<Long> {
+public class RoleSnapshot extends AbstractIdentifiableBean<Long> {
 
     private String name;
 
-    public RoleRef(Long id, String name) {
+    public RoleSnapshot(Long id, String name) {
         super(id);
         this.name = name;
     }

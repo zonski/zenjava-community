@@ -14,6 +14,9 @@ public class Role extends AbstractEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "auto_assign")
+    private boolean autoAssign;
+
     @ElementCollection
     @CollectionTable(name="role_permission", joinColumns = @JoinColumn(name = "role_id"))
     @Column(name = "permission")
@@ -22,9 +25,10 @@ public class Role extends AbstractEntity {
     public Role() {
     }
 
-    public Role(String name, String description, Set<String> permissions) {
+    public Role(String name, String description, boolean autoAssign, Set<String> permissions) {
         this.name = name;
         this.description = description;
+        this.autoAssign = autoAssign;
         this.permissions = permissions;
     }
 
@@ -42,6 +46,14 @@ public class Role extends AbstractEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isAutoAssign() {
+        return autoAssign;
+    }
+
+    public void setAutoAssign(boolean autoAssign) {
+        this.autoAssign = autoAssign;
     }
 
     public Set<String> getPermissions() {

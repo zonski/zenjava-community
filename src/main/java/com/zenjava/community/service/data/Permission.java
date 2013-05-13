@@ -5,6 +5,8 @@ public class Permission {
     public static final String ALL_PERMISSIONS = "*";
 
     public static final String USER_VIEW_ANY = "user.view.any";
+    public static final String USER_VIEW_OWN = "user.view.own";
 
     public static final String ROLE_VIEW_ANY = "role.view.any";
+
 }

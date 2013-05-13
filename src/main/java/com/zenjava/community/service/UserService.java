@@ -6,16 +6,20 @@ import java.util.List;
 
 public interface UserService {
 
+    UserDetail getCurrentUser();
+
     UserDetail findUser(long id);
 
     UserDetail findUser(String username);
 
-    List<UserRef> findAllUsers();
+    List<UserSnapshot> findAllUsers();
 
     RoleDetail findRole(long id);
 
-    List<RoleRef> findAllRoles();
+    List<RoleSnapshot> findAllRoles();
 
-    UserRef signUpUser(SignUpRequest request);
+    UserSnapshot signUpUser(SignUpRequest request);
+
+    UserSnapshot activateUserAccount(String activationCode);
 
 }

@@ -19,6 +19,12 @@ public class User extends AbstractEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "activation_code")
+    private String activationCode;
+
+    @Column(name = "activated")
+    private boolean activated;
+
     @Column(name = "first_name")
     private String firstName;
 
@@ -35,9 +41,9 @@ public class User extends AbstractEntity {
     public User() {
     }
 
-    public User(String username, String password, String email, String firstName, String lastName, Collection<Role> roles) {
+    public User(String username, boolean activated, String email, String firstName, String lastName, Collection<Role> roles) {
         this.username = username;
-        this.password = password;
+        this.activated = activated;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -62,6 +68,22 @@ public class User extends AbstractEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 
     public String getFirstName() {

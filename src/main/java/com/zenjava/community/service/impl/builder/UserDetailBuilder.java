@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class UserDetailBuilder extends AbstractBuilder<User, UserDetail> {
 
     @Autowired
-    private RoleRefBuilder roleRefBuilder;
+    private RoleSnapshotBuilder roleSnapshotBuilder;
 
     @Override
     protected UserDetail buildBean(User entity) {
@@ -18,7 +18,8 @@ public class UserDetailBuilder extends AbstractBuilder<User, UserDetail> {
         		entity.getUsername(),
         		entity.getFirstName(),
         		entity.getLastName(),
-                roleRefBuilder.build(entity.getRoles())
+                entity.isActivated(),
+                roleSnapshotBuilder.build(entity.getRoles())
         );
     }
 }

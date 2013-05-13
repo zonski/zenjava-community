@@ -12,7 +12,8 @@ public class SystemInfoDetailBuilder extends AbstractBuilder<SystemInfo, SystemI
         return new SystemInfoDetail(
                 entity.getId(),
         		entity.getName(),
-                entity.getDescription()
+                entity.getDescription(),
+                entity.getBaseUrl()
         );
     }
 }
