@@ -15,6 +15,10 @@ public class CustomUserDetails extends User {
         this.user = user;
     }
 
+    public String getDisplayName() {
+        return user.getFirstName();
+    }
+
     public UserDetail getUser() {
         return user;
     }

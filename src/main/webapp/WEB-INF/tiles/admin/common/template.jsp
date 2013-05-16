@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
+
 <html>
 <head>
     <tiles:insertAttribute name="meta"/>
     <link href="/resources/ext/bootstrap-2.3.1/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/resources/css/community-style.css" rel="stylesheet" media="screen">
+    <link href="/resources/css/community-admin-style.css" rel="stylesheet" media="screen">
 <body>
 
 <div class="container-fluid">

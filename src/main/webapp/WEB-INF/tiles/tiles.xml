@@ -27,11 +27,6 @@
         <put-attribute name="footer" value="/WEB-INF/tiles/front/common/footer.jsp" />
     </definition>
 
-    <definition name="*/login" extends="frontBase">
-        <put-attribute name="body" value="/WEB-INF/tiles/front/login/body.jsp" />
-        <put-attribute name="header" value="/WEB-INF/tiles/front/login/header.jsp" />
-    </definition>
-
     <definition name="*/*" extends="frontBase">
         <put-attribute name="body" value="/WEB-INF/tiles/front/{2}/body.jsp" />
     </definition>

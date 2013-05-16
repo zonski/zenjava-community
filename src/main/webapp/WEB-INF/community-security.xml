@@ -12,7 +12,7 @@
             access-decision-manager-ref="customAccessDecisionManager"
             secured-annotations="enabled" />
 
-    <http auto-config='true' access-denied-page="/denied">
+    <http auto-config='true' access-denied-page="/denied" use-expressions="true">
         <http-basic/>
         <form-login login-page="/login"
                     authentication-failure-url="/login?authfailed=true"

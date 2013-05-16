@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
@@ -22,7 +23,9 @@
 
                 <ul class="nav pull-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">[username] <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <sec:authentication property="principal.username" /> <b class="caret"></b>
+                        </a>
                         <ul class="dropdown-menu">
                             <li><a href="/logout">Logout</a></li>
                         </ul>
