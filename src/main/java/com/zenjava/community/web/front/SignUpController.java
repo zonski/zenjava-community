@@ -1,7 +1,10 @@
 package com.zenjava.community.web.front;
 
+import com.google.code.kaptcha.Constants;
+import com.google.code.kaptcha.Producer;
 import com.zenjava.community.service.UserService;
 import com.zenjava.community.service.data.SignUpRequest;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +14,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.awt.image.BufferedImage;
 
 @Controller
 public class SignUpController {
@@ -21,6 +30,9 @@ public class SignUpController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private Producer captchaProducer;
 
     @RequestMapping(value = "/signup")
     public String showSignUpPage(Model model) {
@@ -35,9 +47,40 @@ public class SignUpController {
         return "/signup/done";
     }
 
+    @RequestMapping("/captcha")
+    public ModelAndView generateCaptchaImage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        response.setDateHeader("Expires", 0);
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+        response.setHeader("Pragma", "no-cache");
+        response.setContentType("image/jpeg");
+
+        // create the text and matching image
+        String capText = captchaProducer.createText();
+        request.getSession().setAttribute(Constants.KAPTCHA_SESSION_KEY, capText);
+        BufferedImage bi = captchaProducer.createImage(capText);
+
+        ServletOutputStream out = response.getOutputStream();
+        ImageIO.write(bi, "jpg", out);
+        try {
+            out.flush();
+        } finally {
+            out.close();
+        }
+        return null;
+    }
+
     @RequestMapping(value = "/signup.do")
-    public String setupSystem(@ModelAttribute("signUp") @Valid SignUpRequest request, BindingResult result) {
+    public String signUp(HttpServletRequest httpRequest, @ModelAttribute("signUp") @Valid SignUpRequest request, BindingResult result) {
         log.info("Signing up new user");
+
+        // check capture code
+        String captchaId = (String) httpRequest.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        String response = request.getCaptchaResponse();
+        log.debug("Validating captcha response: '" + response + "'");
+        if (!StringUtils.equalsIgnoreCase(captchaId, response)) {
+            result.rejectValue("captchaResponse", "error.invalidcaptcha", "Invalid Entry");
+        }
 
         if (result.hasErrors()) {
             return "/signup/form";
@@ -54,5 +97,4 @@ public class SignUpController {
         userService.activateUserAccount(code);
         return "/signup/activated";
     }
-
 }

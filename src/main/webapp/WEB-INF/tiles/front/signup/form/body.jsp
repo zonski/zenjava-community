@@ -11,6 +11,8 @@
             <legend class="">Sign up for an account</legend>
         </div>
 
+        <form:errors/>
+
         <!-- Username -->
         <div class="control-group">
             <form:label path="username" cssClass="control-label">Username</form:label>
@@ -51,7 +53,7 @@
         <div class="control-group">
             <form:label path="password" cssClass="control-label">Password</form:label>
             <div class="controls">
-                <form:password path="password" cssClass="input-xlarge"/>
+                <form:password id="password" path="password" cssClass="input-xlarge"/>
                 <form:errors path="password"/>
             </div>
         </div>
@@ -65,11 +67,30 @@
             </div>
         </div>
 
+        <!-- Password strength indicator-->
+        <div class="control-group">
+            <div class="controls">
+                <span id="password-progress"></span>
+                <span id="password-verdict"></span>
+                <span id="password-errors"></span>
+            </div>
+        </div>
+
+        <!-- Captcha code-->
+        <div class="control-group">
+            <form:label path="captchaResponse" cssClass="control-label">Are you human?</form:label>
+            <div class="controls">
+                <img src="<c:url value="/captcha"/>"/>
+                <form:input path="captchaResponse" cssClass="input-xlarge"/>
+                <form:errors path="captchaResponse"/>
+            </div>
+        </div>
+
 
         <!-- Buttons -->
         <div class="control-group">
             <div class="controls">
-                <button class="btn btn-success">Sign up</button>
+                <button class="btn btn-primary">Sign up</button>
             </div>
         </div>
 

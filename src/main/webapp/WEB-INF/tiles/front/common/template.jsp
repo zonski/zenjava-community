@@ -41,6 +41,7 @@
 <script src="/resources/ext/theme-crisp-cool/assets/js/lemmon-slider-min.js"></script><!-- lemmon slider js -->
 <script src="/resources/ext/theme-crisp-cool/assets/js/scripts.js"></script><!-- lemmon slider js -->
 
+<tiles:insertAttribute name="scripts" ignore="true"/>
 
 </body>
 </html>

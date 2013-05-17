@@ -1,23 +1,32 @@
 package com.zenjava.community.service.data;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class SignUpRequest {
+public class SignUpRequest implements ConfirmedPasswordRequest {
 
     @NotNull
     @Size(min=3,max=20)
     private String username;
 
+    @Email
+    @NotBlank
     private String email;
 
+    @NotBlank
     private String firstName;
 
+    @NotBlank
     private String lastName;
 
     private String password;
 
     private String confirmPassword;
+
+    private String captchaResponse;
 
     public SignUpRequest() {
     }
@@ -68,5 +77,13 @@ public class SignUpRequest {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getCaptchaResponse() {
+        return captchaResponse;
+    }
+
+    public void setCaptchaResponse(String captchaResponse) {
+        this.captchaResponse = captchaResponse;
     }
 }

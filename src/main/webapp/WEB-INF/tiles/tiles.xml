@@ -29,10 +29,12 @@
 
     <definition name="*/*" extends="frontBase">
         <put-attribute name="body" value="/WEB-INF/tiles/front/{2}/body.jsp" />
+        <put-attribute name="scripts" value="/WEB-INF/tiles/front/{2}/scripts.jsp" />
     </definition>
 
     <definition name="*/*/*" extends="frontBase">
         <put-attribute name="body" value="/WEB-INF/tiles/front/{2}/{3}/body.jsp" />
+        <put-attribute name="scripts" value="/WEB-INF/tiles/front/{2}/{3}/scripts.jsp" />
     </definition>
 
 </tiles-definitions>
