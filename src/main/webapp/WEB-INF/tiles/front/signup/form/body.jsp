@@ -18,6 +18,8 @@
             <form:label path="username" cssClass="control-label">Username</form:label>
             <div class="controls">
                 <form:input path="username" cssClass="input-xlarge"/>
+                <a id="check-username-btn" href="#" class="btn btn-small"/>check</a>
+                <span id="check-username-result"></span>
                 <form:errors path="username"/>
             </div>
         </div>

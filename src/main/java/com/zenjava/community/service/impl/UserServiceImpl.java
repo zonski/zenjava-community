@@ -127,6 +127,12 @@ public class UserServiceImpl implements UserService {
         return userSnapshotBuilder.build(user);
     }
 
+    @Override
+    public Boolean isUsernameAvailable(String username) {
+        User user  = userRepository.findByUsername(username);
+        return user == null;
+    }
+
     private void sendConfirmationEmail(final User user) {
         log.info("Sending signup confirmation email to: '{}'", user.getUsername());
 

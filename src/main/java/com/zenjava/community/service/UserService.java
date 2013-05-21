@@ -22,4 +22,5 @@ public interface UserService {
 
     UserSnapshot activateUserAccount(String activationCode);
 
+    Boolean isUsernameAvailable(String username);
 }
