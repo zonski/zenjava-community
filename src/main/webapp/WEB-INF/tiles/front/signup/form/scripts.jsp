@@ -20,7 +20,6 @@
         $("#check-username-btn").click (function () {
 
             var username = $("#username").val();
-            alert("Checking username: " + username);
             $.ajax({
                 type: "POST", // or GET
                 url: "/checkusername.ajax",
